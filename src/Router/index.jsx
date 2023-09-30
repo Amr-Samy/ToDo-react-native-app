@@ -26,17 +26,7 @@ const Router = () => {
                         backgroundColor: '#6F35A5',
                     }
                 }}
-                tabBarOptions={{
-                    // activeTintColor: '#fff',
-                    // inactiveTintColor: 'lightgray',
-                    // activeBackgroundColor: '#6F35A5',
-                    // inactiveBackgroundColor: '#230E36',
-                    // showLabel: false,
-                    style: {
-                        backgroundColor: '#6F35A5',
-                        // paddingBottom: 3
-                    }
-                }}
+
             >
                 <Tab.Screen
                     name="Main"

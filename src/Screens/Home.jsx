@@ -75,31 +75,27 @@ const Home = () => {
                 </>
             )}
 
-            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                <View style={styles.centeredView}>
-                    <Modal
-                        animationType="slide"
-                        transparent={true}
-                        visible={modalVisible}
-                        onRequestClose={() => {
-                            // Alert.alert('Modal has been closed.');
-                            setModalVisible(!modalVisible);
-                        }}>
-                        <View style={styles.centeredView}>
-                            <View style={styles.modalView}>
-                                <Text style={styles.textStyle}>U already have added that one before!</Text>
-                                <TouchableOpacity
-                                    style={[styles.button]}
-                                    onPress={() => setModalVisible(!modalVisible)}>
-                                    <Text style={styles.textStyle}>Cancel</Text>
-                                </TouchableOpacity>
-                            </View>
+            <View style={styles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        // Alert.alert('Modal has been closed.');
+                        setModalVisible(!modalVisible);
+                    }}>
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={styles.textStyle}>U already have added that one before!</Text>
+                            <TouchableOpacity
+                                style={[styles.button]}
+                                onPress={() => setModalVisible(!modalVisible)}>
+                                <Text style={styles.textStyle}>Cancel</Text>
+                            </TouchableOpacity>
                         </View>
-                    </Modal>
-                </View>
-            </TouchableOpacity>
-
-
+                    </View>
+                </Modal>
+            </View>
 
         </View>
     );
