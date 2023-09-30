@@ -9,11 +9,13 @@ import {
     Keyboard,
     Modal,
     Alert,
+    Platform,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styles } from '../../styles';
 import Input from '../components/Input/Input';
 import Todos from '../components/TodosSection';
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 const Home = () => {
     const [todoList, settodoList] = useState([]);
@@ -21,7 +23,17 @@ const Home = () => {
     const [description, setDescription] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
 
-    const addTodo = () => {
+    useEffect(() => {
+        syncStorage();
+        // console.log(todoList);
+    }, []);
+
+    const syncStorage = async () => {
+        const localTodos = await AsyncStorage.getItem('todoList');
+        if (localTodos) settodoList(JSON.parse(localTodos));
+    }
+
+    const addTodo = async () => {
         let exist = todoList.find((item) => item.title === title);
         if (title && exist === undefined) {
             const newTodo = {
@@ -33,6 +45,7 @@ const Home = () => {
             //? todoList.push(newTodo);
             //? newList.reverse();
             const newList = [newTodo, ...todoList];
+            await AsyncStorage.setItem('todoList', JSON.stringify(newList));
             settodoList(newList);
             Keyboard.dismiss();
             // console.log("added:" + newTodo + "successfully");
@@ -42,12 +55,18 @@ const Home = () => {
             setModalVisible(true);
         }
     };
+    const removeTodo = async (todo) => {
+        let newList = todoList.filter((item) => item.id !== todo.id);
+        await AsyncStorage.setItem('todoList', JSON.stringify(newList));
+        settodoList(newList);
+    }
 
     return (
         <View style={styles.container}>
-            {/* <ImageBackground source={require('./assets/portal.gif')} style={{ width: 200, height: 200 }} > */}
-            <Image source={require('../../assets/todo1.png')} style={{ width: 100, height: 100 }} />
-            {/* </ImageBackground> */}
+            <ImageBackground source={require('../../assets/portal.gif')}
+                style={{ width: 200, height: 200, display: Platform.OS === 'android' ? "none" : 'flex' }} >
+                <Image source={require('../../assets/todo1.png')} style={{ width: 100, height: 100, top: 50, left: 50 }} />
+            </ImageBackground>
 
             <Text style={styles.text}>What needs to be done ?</Text>
             <Input
@@ -71,7 +90,7 @@ const Home = () => {
             {todoList.length !== 0 && (
                 <>
                     <View style={styles.divider} />
-                    <Todos todoList={todoList} />
+                    <Todos todoList={todoList} removeHandel={removeTodo} />
                 </>
             )}
 

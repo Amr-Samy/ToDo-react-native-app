@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { Platform } from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -21,9 +21,19 @@ const Router = () => {
                     tabBarInactiveTintColor: 'lightgray',
                     tabBarActiveBackgroundColor: '#6F35A5',
                     tabBarInactiveBackgroundColor: '#230E36',
-                    tabBarShowLabel: false,
+                    tabBarShowLabel: Platform.OS == "web" ? true : false,
+
                     tabBarStyle: {
                         backgroundColor: '#6F35A5',
+                        // borderRadius: 25,
+                        // marginHorizontal: 5,
+                        borderTopLeftRadius: 15,
+                        borderTopRightRadius: 15,
+                        borderLeftWidth: 0.2,
+                        borderRightWidth: 0.2,
+                        position: 'absolute',
+                        overflow: 'hidden',
+
                     }
                 }}
 

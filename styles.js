@@ -97,13 +97,14 @@ export const styles = StyleSheet.create({
     width: 300,
     minHeight: 50,
     padding: 15,
-    alignItems: "flex-start",
+    alignItems: "stretch",
     justifyContent: "center",
     backgroundColor: "transparent",
     marginBottom: 10,
     borderRadius: 5,
     borderColor: "#6F35A5",
     borderWidth: 1,
+    flexDirection: "row",
   },
 
   // ! Modal

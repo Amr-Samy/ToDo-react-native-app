@@ -2,13 +2,14 @@ import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import Todo from './Todo';
 
-const Todos = ({ todoList }) => {
+const Todos = ({ todoList, removeHandel }) => {
+
     return (
-        <ScrollView>
+        <View>
             {todoList.map(todo => (
-                <Todo todo={todo} key={todo.id} />
+                <Todo todo={todo} key={todo.id} removeHandel={removeHandel} />
             ))}
-        </ScrollView>
+        </View>
     )
 }
 
