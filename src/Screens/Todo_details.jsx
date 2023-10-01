@@ -1,6 +1,7 @@
 import { View, Text } from "react-native";
 import React, { useEffect } from "react";
 import { useRoute } from "@react-navigation/native";
+import { Ionicons } from '@expo/vector-icons';
 import { styles } from '../../styles';
 
 const TodoDetails = () => {
@@ -8,7 +9,6 @@ const TodoDetails = () => {
 
     function convertMS(old, now) {
         const ms = parseInt(now) - parseInt(old);
-        console.log(ms);
         var d, h, m, s;
         s = Math.floor(ms / 1000);
         m = Math.floor(s / 60);
@@ -20,7 +20,7 @@ const TodoDetails = () => {
 
         var pad = function (n) { return n < 10 ? '0' + n : n; };
 
-        var result = d + ' days ' + pad(h) + ' houres ' + pad(m) + ' minutes';
+        var result = d + ' d ' + pad(h) + ' h ' + pad(m) + ' min';
         return result;
     };
     return (
@@ -30,8 +30,11 @@ const TodoDetails = () => {
                     <Text style={styles.text}>{params.title}</Text>
 
                     <Text style={styles.subText}>{params.description}</Text>
+                    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                        <Ionicons name="hourglass-outline" color={"#6F35A5"} size={25} />
 
-                    <Text style={styles.subText}>Added since : {convertMS(params.id, Date.now())}</Text>
+                        <Text style={styles.subText}>Added since : {convertMS(params.id, Date.now())}</Text>
+                    </View>
                 </>
             )}
         </View>

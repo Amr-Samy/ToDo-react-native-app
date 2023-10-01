@@ -1,11 +1,8 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  // html :{
-  //     fontSize: "4px",
-  // },
   container: {
-    // flex: 1,
+    flex: 1,
     backgroundColor: "#100F2C",
     alignItems: "center",
     paddingBottom: 20,

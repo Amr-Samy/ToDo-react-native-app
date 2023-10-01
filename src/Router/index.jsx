@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import StackNavigator from "./StackNavigator";
 import CompletedTodos from './../Screens/Completed_screen';
+import IncompletedTodos from "./../Screens/Incomplete_screen";
+
 
 const Tab = createBottomTabNavigator();
 
@@ -26,11 +28,10 @@ const Router = () => {
                     tabBarStyle: {
                         backgroundColor: '#6F35A5',
                         // borderRadius: 25,
-                        // marginHorizontal: 5,
                         borderTopLeftRadius: 15,
                         borderTopRightRadius: 15,
-                        borderLeftWidth: 0.2,
-                        borderRightWidth: 0.2,
+                        borderLeftWidth: 0.1,
+                        borderRightWidth: 0.1,
                         position: 'absolute',
                         overflow: 'hidden',
 
@@ -55,6 +56,16 @@ const Router = () => {
                         tabBarLabel: 'Done',
                         tabBarIcon: ({ color, size }) => (
                             <Ionicons name="checkmark-done-outline" color={color} size={size} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="NotDone"
+                    component={IncompletedTodos}
+                    options={{
+                        tabBarLabel: 'NotDone',
+                        tabBarIcon: ({ color, size }) => (
+                            <Ionicons name="close-circle" color={color} size={size} />
                         ),
                     }}
                 />

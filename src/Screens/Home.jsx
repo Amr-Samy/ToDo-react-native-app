@@ -15,16 +15,22 @@ import React, { useEffect, useState } from "react";
 import { styles } from '../../styles';
 import Input from '../components/Input/Input';
 import Todos from '../components/TodosSection';
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo } from "../Redux/slices/Todo.sclice";
+
 
 const Home = () => {
-    const [todoList, settodoList] = useState([]);
+    // const [todoList, settodoList] = useState([]);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
 
+    const dispatch = useDispatch();
+    const { todoList } = useSelector((state) => state.todo);
+
     useEffect(() => {
-        syncStorage();
+        // syncStorage();
         // console.log(todoList);
     }, []);
 
@@ -33,36 +39,19 @@ const Home = () => {
         if (localTodos) settodoList(JSON.parse(localTodos));
     }
 
-    const addTodo = async () => {
+    const createTodo = () => {
         let exist = todoList.find((item) => item.title === title);
         if (title && exist === undefined) {
-            const newTodo = {
-                id: Date.now(),
-                isDone: false,
-                title,
-                description,
-            };
-            //? todoList.push(newTodo);
-            //? newList.reverse();
-            const newList = [newTodo, ...todoList];
-            await AsyncStorage.setItem('todoList', JSON.stringify(newList));
-            settodoList(newList);
+            dispatch(addTodo({ title, description }));
             Keyboard.dismiss();
-            // console.log("added:" + newTodo + "successfully");
         }
         else if (exist != undefined) {
-            // console.log("u have added that one before : " + exist);
             setModalVisible(true);
         }
-    };
-    const removeTodo = async (todo) => {
-        let newList = todoList.filter((item) => item.id !== todo.id);
-        await AsyncStorage.setItem('todoList', JSON.stringify(newList));
-        settodoList(newList);
     }
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <ImageBackground source={require('../../assets/portal.gif')}
                 style={{ width: 200, height: 200, display: Platform.OS === 'android' ? "none" : 'flex' }} >
                 <Image source={require('../../assets/todo1.png')} style={{ width: 100, height: 100, top: 50, left: 50 }} />
@@ -83,18 +72,18 @@ const Home = () => {
             >
             </Input>
 
-            <TouchableOpacity style={styles.submitBtn} onPress={addTodo}>
+            <TouchableOpacity style={styles.submitBtn} onPress={createTodo}>
                 <Text style={styles.text}>save</Text>
             </TouchableOpacity>
 
             {todoList.length !== 0 && (
                 <>
                     <View style={styles.divider} />
-                    <Todos todoList={todoList} removeHandel={removeTodo} />
+                    <Todos />
                 </>
             )}
 
-            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+            {/* <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                 <View style={styles.centeredView}>
                     <Modal
                         animationType="slide"
@@ -116,9 +105,9 @@ const Home = () => {
                         </View>
                     </Modal>
                 </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
-        </SafeAreaView >
+        </View >
     );
 };
 export default Home;
