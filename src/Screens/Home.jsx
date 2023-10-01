@@ -34,15 +34,16 @@ const Home = () => {
         // console.log(todoList);
     }, []);
 
-    const syncStorage = async () => {
-        const localTodos = await AsyncStorage.getItem('todoList');
-        if (localTodos) settodoList(JSON.parse(localTodos));
+    const syncStorage = () => {
+        const localTodos = AsyncStorage.getItem('todoList');
+        // if (localTodos) { todoList = (JSON.parse(localTodos)); }
     }
 
     const createTodo = () => {
         let exist = todoList.find((item) => item.title === title);
         if (title && exist === undefined) {
             dispatch(addTodo({ title, description }));
+            // AsyncStorage.setItem("todoList", JSON.stringify(newList));
             Keyboard.dismiss();
         }
         else if (exist != undefined) {
@@ -52,10 +53,10 @@ const Home = () => {
 
     return (
         <View style={styles.container}>
-            <ImageBackground source={require('../../assets/portal.gif')}
+            {/* <ImageBackground source={require('../../assets/portal.gif')}
                 style={{ width: 200, height: 200, display: Platform.OS === 'android' ? "none" : 'flex' }} >
-                <Image source={require('../../assets/todo1.png')} style={{ width: 100, height: 100, top: 50, left: 50 }} />
-            </ImageBackground>
+            </ImageBackground> */}
+            <Image source={require('../../assets/todo1.png')} style={{ width: 100, height: 100 }} />
 
             <Text style={styles.text}>What needs to be done ?</Text>
             <Input
@@ -83,29 +84,34 @@ const Home = () => {
                 </>
             )}
 
-            {/* <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                <View style={styles.centeredView}>
-                    <Modal
-                        animationType="slide"
-                        transparent={true}
-                        visible={modalVisible}
-                        onRequestClose={() => {
-                            // Alert.alert('Modal has been closed.');
-                            setModalVisible(!modalVisible);
-                        }}>
+            {
+                modalVisible ? (
+                    <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                         <View style={styles.centeredView}>
-                            <View style={styles.modalView}>
-                                <Text style={styles.textStyle}>U already have added that one before!</Text>
-                                <TouchableOpacity
-                                    style={[styles.button]}
-                                    onPress={() => setModalVisible(!modalVisible)}>
-                                    <Text style={styles.textStyle}>Cancel</Text>
-                                </TouchableOpacity>
-                            </View>
+                            <Modal
+                                animationType="slide"
+                                transparent={true}
+                                visible={modalVisible}
+                                onRequestClose={() => {
+                                    // Alert.alert('Modal has been closed.');
+                                    setModalVisible(!modalVisible);
+                                }}>
+                                <View style={styles.centeredView}>
+                                    <View style={styles.modalView}>
+                                        <Text style={styles.textStyle}>U already have added that one before!</Text>
+                                        <TouchableOpacity
+                                            style={[styles.button]}
+                                            onPress={() => setModalVisible(!modalVisible)}>
+                                            <Text style={styles.textStyle}>Cancel</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            </Modal>
                         </View>
-                    </Modal>
-                </View>
-            </TouchableOpacity> */}
+                    </TouchableOpacity>
+                ) : <></>
+            }
+
 
         </View >
     );

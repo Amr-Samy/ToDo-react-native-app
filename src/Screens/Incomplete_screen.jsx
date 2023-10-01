@@ -18,7 +18,7 @@ const IncompletedTodos = () => {
 
     return (
         <View style={styles.container}>
-            <Image source={require('../../assets/todo3.png')} style={{ width: 100, height: 100 }} />
+            <Image source={require('../../assets/todo3.png')} style={{ width: 100, height: 100, marginBottom: 10 }} />
             {
                 doneTodos.length ? (
                     <FlatList

@@ -18,7 +18,7 @@ const TodoSlice = createSlice({
           description,
         };
         const newList = [newTodo, ...state.todoList];
-        // await AsyncStorage.setItem("todoList", JSON.stringify(newList));
+        // AsyncStorage.setItem("todoList", JSON.stringify(newList));
         state.todoList = [...newList];
       }
     },
