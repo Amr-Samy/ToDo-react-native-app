@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   //     fontSize: "4px",
   // },
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: "#100F2C",
     alignItems: "center",
     paddingBottom: 20,
@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
     marginVertical: 15,
   },
   filterContainer: {
-    flexDirection: "row",
+    // flexDirection: "row",
     width: "90%",
     justifyContent: "space-between",
   },

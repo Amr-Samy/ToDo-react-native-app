@@ -1,15 +1,20 @@
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, SafeAreaView, FlatList } from 'react-native'
 import React from 'react'
 import Todo from './Todo';
 
 const Todos = ({ todoList, removeHandel }) => {
 
     return (
-        <View>
-            {todoList.map(todo => (
-                <Todo todo={todo} key={todo.id} removeHandel={removeHandel} />
-            ))}
-        </View>
+        <SafeAreaView>
+
+            <FlatList
+                data={todoList}
+                renderItem={({ item }) => <Todo todo={item} key={item.id} removeHandel={removeHandel} />}
+                keyExtractor={item => item.id}
+                contentContainerStyle={{ flexGrow: 1 }}
+            />
+
+        </SafeAreaView>
     )
 }
 

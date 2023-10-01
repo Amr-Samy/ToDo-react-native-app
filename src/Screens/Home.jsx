@@ -62,7 +62,7 @@ const Home = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <ImageBackground source={require('../../assets/portal.gif')}
                 style={{ width: 200, height: 200, display: Platform.OS === 'android' ? "none" : 'flex' }} >
                 <Image source={require('../../assets/todo1.png')} style={{ width: 100, height: 100, top: 50, left: 50 }} />
@@ -118,7 +118,7 @@ const Home = () => {
                 </View>
             </TouchableOpacity>
 
-        </View >
+        </SafeAreaView >
     );
 };
 export default Home;
