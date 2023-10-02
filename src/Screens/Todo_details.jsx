@@ -32,7 +32,7 @@ const TodoDetails = () => {
                     <Text style={styles.subText}>{params.description}</Text>
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                         <Ionicons name="hourglass-outline" color={"#6F35A5"} size={25} />
-
+                        <View style={styles.divider} />
                         <Text style={styles.subText}>Added since : {convertMS(params.id, Date.now())}</Text>
                     </View>
                 </>
